@@ -19,6 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.parse.ParseAnalytics;
+
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
 
@@ -42,10 +44,16 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        ParseAnalytics.trackAppOpened(getIntent());
+
         Intent intent = new Intent(this, LoginActivity.class);
+        //These flags are used to clear the previous activity history. This prevents MainActivity from appearing after pressing android back button.
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+
+
 
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
